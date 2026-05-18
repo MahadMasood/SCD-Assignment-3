@@ -3,6 +3,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+//Custom exception thrown when a required input field is empty or null.
 class EmptyFieldException extends Exception {
     public EmptyFieldException(String message) {
         super(message);
