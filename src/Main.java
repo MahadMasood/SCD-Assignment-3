@@ -46,6 +46,7 @@ class LibraryBookIssueSystem extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(10, 2, 10, 10));
 
+        //  Creating and initializing all the components of the GUI
         lblName = new JLabel("Student Name:");
         lblRoll = new JLabel("Roll Number:");
         lblBookTitle = new JLabel("Book Title:");
@@ -55,6 +56,7 @@ class LibraryBookIssueSystem extends JFrame {
         lblRemarks = new JLabel("Remarks:");
         lblEdition = new JLabel("Book Edition:");
 
+        //  Initializing text fields, text area, combo box, radio buttons, and buttons
         txtName = new JTextField();
         txtRoll = new JTextField();
         txtBookTitle = new JTextField();
@@ -73,10 +75,12 @@ class LibraryBookIssueSystem extends JFrame {
         editionGroup.add(rbNew);
         editionGroup.add(rbOld);
 
+        //  Panel to hold the radio buttons for book edition selection
         JPanel radioPanel = new JPanel();
         radioPanel.add(rbNew);
         radioPanel.add(rbOld);
 
+        //  Initializing buttons and adding action listeners for their respective functionalities
         btnIssue = new JButton("Issue Book");
         btnReset = new JButton("Reset");
         btnExit = new JButton("Exit");
@@ -88,7 +92,7 @@ class LibraryBookIssueSystem extends JFrame {
                 String bookTitle = txtBookTitle.getText().trim();
                 String issueDateStr = txtIssueDate.getText().trim();
                 String returnDateStr = txtReturnDate.getText().trim();
-
+                //  Validating that all required fields are filled and contain valid data
                 if (name.isEmpty() || roll.isEmpty() || bookTitle.isEmpty() || issueDateStr.isEmpty() || returnDateStr.isEmpty()) {
                     throw new EmptyFieldException("All text fields are required and cannot be empty!");
                 }
@@ -129,7 +133,7 @@ class LibraryBookIssueSystem extends JFrame {
 
                 String edition = rbNew.isSelected() ? "New Edition" : "Old Edition";
                 String category = comboCategory.getSelectedItem().toString();
-
+                //  If all validations pass, display a success message with the entered details
                 JOptionPane.showMessageDialog(this,
                         "Book Issued Successfully!\n\n"
                                 + "Student Name: " + name + "\n"
@@ -141,7 +145,7 @@ class LibraryBookIssueSystem extends JFrame {
                                 + "Return Date: " + returnDateStr,
                         "Success", JOptionPane.INFORMATION_MESSAGE);
 
-            }
+            }//  Catching specific exceptions related to validation and displaying appropriate error messages to the user
             catch (EmptyFieldException | NullSelectionException | InvalidRollNumberException | InvalidDateException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Validation Error", JOptionPane.WARNING_MESSAGE);
             } catch (NumberFormatException ex) {
@@ -153,7 +157,7 @@ class LibraryBookIssueSystem extends JFrame {
                 JOptionPane.showMessageDialog(this, "Operation Completed: Data validation phase finished.", "System Status", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-
+        //  Action listener for the reset button to clear all input fields and reset selections
         btnReset.addActionListener(e -> {
             txtName.setText("");
             txtRoll.setText("");
